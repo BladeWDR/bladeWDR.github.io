@@ -1,6 +1,7 @@
-baseurl = "blog.bladewdr.xyz"
+baseurl = "http://blog.bladewdr.xyz/"
 languageCode = "en-us"
 paginate = 5
+theme='hugo-theme-terminal'
 
 [params]
   # dir name of your main content (default is `content/posts`).
