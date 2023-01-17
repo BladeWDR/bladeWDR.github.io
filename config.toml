@@ -1,0 +1,4 @@
+baseURL = 'http://blog.bladewdr.xyz/'
+languageCode = 'en-us'
+title = "Blade's tech docs"
+theme= 'hugo-theme-terminal'
