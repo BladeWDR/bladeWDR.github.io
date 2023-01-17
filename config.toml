@@ -1,5 +1,5 @@
 baseurl = "http://blog.bladewdr.xyz/"
-description = "tech guides for dipshits, by a dipshit."
+title = "tech guides for dipshits, by a dipshit."
 languageCode = "en-us"
 paginate = 5
 theme='hugo-theme-terminal'
