@@ -92,6 +92,10 @@ publishdirorig = "docs"
         identifier = "showcase"
         name = "Showcase"
         url = "/showcase"
+      [[languages.en.menu.main]]
+        identifier = "hello"
+        name = "Hello"
+        url = "/hello"
 
 [module]
   # this is needed when you fetch the theme as a submodule to your repo.
