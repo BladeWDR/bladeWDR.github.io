@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on Terminal</title>
+    <title>Linux on Tech Guides for Dipshits</title>
     <link>http://blog.bladewdr.xyz/categories/linux/</link>
-    <description>Recent content in Linux on Terminal</description>
+    <description>Recent content in Linux on Tech Guides for Dipshits</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 16 Jan 2023 20:32:38 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/categories/linux/index.xml" rel="self" type="application/rss+xml" />
