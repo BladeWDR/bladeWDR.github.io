@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tech Guides for Dipshits</title>
-    <link>http://blog.bladewdr.xyz/</link>
-    <description>Recent content on Tech Guides for Dipshits</description>
+    <title>tutorial on Tech Guides for Dipshits</title>
+    <link>http://blog.bladewdr.xyz/tags/tutorial/</link>
+    <description>Recent content in tutorial on Tech Guides for Dipshits</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to install Graylog on Debian 11 (single node)</title>
       <link>http://blog.bladewdr.xyz/posts/graylog-debian-install/</link>
@@ -145,35 +145,6 @@ sudo systemctl --type=service --state=active | grep graylog
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;connect-to-graylog-web-interface&#34;&gt;Connect to Graylog web interface&lt;/h4&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;ip-address&amp;gt;:9000
 &lt;/code&gt;&lt;/pre&gt;</content>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>http://blog.bladewdr.xyz/first-post/</link>
-      <pubDate>Mon, 16 Jan 2023 20:32:38 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/first-post/</guid>
-      <description></description>
-      <content>&lt;h3 id=&#34;first-post-on-the-new-site&#34;&gt;First post on the new site.&lt;/h3&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed efficitur massa, at pellentesque dui. Aliquam et erat congue, mollis diam nec, dignissim dolor. Proin in convallis nisi. Praesent vitae viverra arcu. Mauris sollicitudin neque non cursus iaculis. Mauris aliquet lacinia porta. Integer vel iaculis felis. Aenean nibh lacus, pellentesque in tristique id, rhoncus vel eros.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Donec molestie rhoncus purus, ac aliquet ex vulputate sed. Integer vitae ante non augue tincidunt egestas et molestie nulla. Nunc et nunc in lacus porttitor faucibus. Nulla non condimentum elit. Nam tincidunt odio mattis aliquet lobortis. Quisque odio ante, tincidunt non volutpat at, congue quis elit. Etiam finibus ornare scelerisque.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Aliquam condimentum nulla ac libero accumsan suscipit. Nullam in diam bibendum, volutpat eros ut, dignissim justo. Nam ornare feugiat dolor ac porttitor. Proin rhoncus nibh vel felis ultricies consequat. Nullam accumsan neque neque, eget iaculis risus feugiat ut. Vestibulum volutpat nec lectus ac lobortis. Nunc sollicitudin felis id dignissim finibus. Morbi consequat turpis nec diam finibus, a euismod nisi vehicula. Quisque volutpat ipsum id lectus viverra, sed rutrum purus tempus. Praesent vestibulum facilisis nunc. Aliquam a quam auctor, tempor quam luctus, egestas risus.&lt;/p&gt;
-&lt;p&gt;Aliquam rhoncus leo eu sodales varius. Duis quis enim et nisl malesuada feugiat a a felis. Nunc eget neque eu purus consectetur mollis. Integer ut justo sit amet enim varius placerat. Curabitur id tortor cursus, semper diam eget, rutrum massa. Maecenas pharetra feugiat nisi eget suscipit. Pellentesque risus diam, iaculis nec ipsum a, hendrerit imperdiet orci. Proin bibendum eget lorem vel euismod. Vivamus a faucibus sapien, a elementum dui. Nulla facilisis vehicula posuere. Donec consequat sem in volutpat suscipit. Ut id elementum lectus. Sed pellentesque est felis, hendrerit vehicula metus gravida et.&lt;/p&gt;
-&lt;p&gt;Curabitur aliquam mi risus, id elementum augue dapibus ut. Nunc feugiat justo sit amet tempor auctor. Fusce blandit lacinia lobortis. Morbi mollis urna leo, sit amet semper diam fermentum sed. Maecenas augue urna, imperdiet non fermentum nec, facilisis eget mauris. Quisque rhoncus quam erat, ut sollicitudin metus rhoncus sit amet. Proin tincidunt dictum orci, a tincidunt quam porta ut.&lt;/p&gt;</content>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://blog.bladewdr.xyz/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/about/</guid>
-      <description>About Me IT tech who dabbles in just about everything. Servers, PCs, Networking, DevOps.
-You&amp;rsquo;ll probably only see posts here when shit documentation pisses me off enough to write my own.</description>
-      <content>&lt;h2 id=&#34;about-me&#34;&gt;About Me&lt;/h2&gt;
-&lt;p&gt;IT tech who dabbles in just about everything. Servers, PCs, Networking, DevOps.&lt;/p&gt;
-&lt;p&gt;You&amp;rsquo;ll probably only see posts here when shit documentation pisses me off enough to write my own.&lt;/p&gt;
-</content>
     </item>
     
   </channel>

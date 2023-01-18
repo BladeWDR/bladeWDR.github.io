@@ -21,7 +21,7 @@ publishdirorig = "docs"
   showLanguageSelector = false
 
   # set theme to full screen width
-  fullWidthTheme = false
+  fullWidthTheme = true
 
   # center theme with default width
   centerTheme = true
@@ -82,7 +82,7 @@ publishdirorig = "docs"
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Tech Guides for Dipshits, by a Dipshit."
+      logoText = "Blade's Tech Stuff"
       logoHomeLink = "/"
 
     [languages.en.menu]
@@ -90,14 +90,7 @@ publishdirorig = "docs"
         identifier = "about"
         name = "About"
         url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
-      [[languages.en.menu.main]]
-        identifier = "hello2"
-        name = "Hello2"
-        url = "/hello2"
+
 
 [module]
   # this is needed when you fetch the theme as a submodule to your repo.

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>How to install Graylog on Debian 11 (single node) :: Tech Guides for Dipshits</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.
+Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; |sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.listsudo apt-get updatesudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reloadsudo systemctl enable mongod." />
+<meta name="keywords" content=", " />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="http://blog.bladewdr.xyz/posts/graylog-debian-install/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="http://blog.bladewdr.xyz/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/bladewdr/" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to install Graylog on Debian 11 (single node)">
+<meta property="og:description" content="This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.
+Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; |sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.listsudo apt-get updatesudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reloadsudo systemctl enable mongod." />
+<meta property="og:url" content="http://blog.bladewdr.xyz/posts/graylog-debian-install/" />
+<meta property="og:site_name" content="Tech Guides for Dipshits" />
+
+  
+  
+  <meta property="og:image" content="http://blog.bladewdr.xyz/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-01-17 23:00:46 -0500 EST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Blade&#39;s Tech Stuff
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://blog.bladewdr.xyz/posts/graylog-debian-install/">How to install Graylog on Debian 11 (single node)</a>
+  </h1>
+  <div class="post-meta">
+    
+      <time class="post-date">
+        2023-01-17 ::
+        
+      </time>
+    
+    
+    
+  </div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://blog.bladewdr.xyz/tags/debian/">debian</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/ubuntu/">ubuntu</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/graylog/">graylog</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/logging/">logging</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/linux/">linux</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/tutorial/">tutorial</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#install-prerequisites">Install prerequisites</a></li>
+        <li><a href="#install-graylog">Install Graylog</a></li>
+        <li><a href="#edit-the-configuration-file-for-graylog">Edit the configuration file for Graylog</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>This was tested on 1/17/2023 on Debian 11 and Graylog 5.0
+Using OpenSearch instead of ElasticSearch which is deprecated now.
+This is for a single node&hellip; multiple nodes is something that I have yet to look into.</p>
+<h3 id="install-prerequisites">Install prerequisites<a href="#install-prerequisites" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h4 id="mongodb">MongoDB<a href="#mongodb" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11
+echo &#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&#34; |
+sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+</code></pre><h5 id="enable-mongodb-on-system-startup">Enable MongoDB on system startup<a href="#enable-mongodb-on-system-startup" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h5>
+<pre tabindex="0"><code>sudo systemctl daemon-reload
+sudo systemctl enable mongod.service
+sudo systemctl restart mongod.service
+sudo systemctl --type=service --state=active | grep mongod
+</code></pre><h4 id="opensearch">OpenSearch<a href="#opensearch" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>wget https://artifacts.opensearch.org/releases/bundle/opensearch/1.3.4/opensearch-1.3.4-linux-x64.tar.gz
+</code></pre><p>Disable memory paging and swapping to improve performance.</p>
+<pre tabindex="0"><code>sudo swapoff -a
+</code></pre><p>Increase the number of memory maps available to OpenSearch.</p>
+<pre tabindex="0"><code># Edit the sysctl config file
+sudo vi /etc/sysctl.conf
+
+# Add a line to define the desired value
+# or change the value if the key exists,
+# and then save your changes.
+vm.max_map_count=262144
+
+# Reload the kernel parameters using sysctl
+sudo sysctl -p
+
+# Verify that the change was applied by checking the value
+cat /proc/sys/vm/max_map_count
+</code></pre><h4 id="create-opensearch-user">Create OpenSearch User<a href="#create-opensearch-user" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>sudo adduser --system --disabled-password --disabled-login --home /var/empty --no-create-home --quiet --force-badname --group opensearch
+</code></pre><h4 id="create-directories-and-extract-the-opensearch-archive-you-downloaded-earlier">Create directories and extract the OpenSearch archive you downloaded earlier<a href="#create-directories-and-extract-the-opensearch-archive-you-downloaded-earlier" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>sudo mkdir -p /graylog/opensearch/data
+sudo mkdir /var/log/opensearch
+
+tar -xzvf opensearch-1.3.4-linux-x64.tar.gz
+sudo mv opensearch-1.3.4/* /graylog/opensearch
+
+
+#Set Permissions
+sudo chown -R opensearch:opensearch /graylog/opensearch/
+sudo chown -R opensearch:opensearch /var/log/opensearch
+sudo chmod -R 2750 /graylog/opensearch/
+sudo chmod -R 2750 /var/log/opensearch
+
+#Create empty log file
+sudo -u opensearch touch /var/log/opensearch/graylog.log
+</code></pre><h4 id="create-a-system-service-for-opensearch">Create a system service for opensearch<a href="#create-a-system-service-for-opensearch" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>
+sudo su
+
+cat &gt; /etc/systemd/system/opensearch.service &lt;&lt;EOF
+[Unit]
+Description=Opensearch
+Documentation=https://opensearch.org/docs/latest
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+ConditionPathExists=/graylog/opensearch
+ConditionPathExists=/graylog/opensearch/data
+[Service]
+Environment=OPENSEARCH_HOME=/graylog/opensearch
+Environment=OPENSEARCH_PATH_CONF=/graylog/opensearch/config
+ReadWritePaths=/var/log/opensearch
+User=opensearch
+Group=opensearch
+WorkingDirectory=/graylog/opensearch
+ExecStart=/graylog/opensearch/bin/opensearch
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE=65535
+# Specifies the maximum number of processes
+LimitNPROC=4096
+# Specifies the maximum size of virtual memory
+LimitAS=infinity
+# Specifies the maximum file size
+LimitFSIZE=infinity
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=0
+# SIGTERM signal is used to stop the Java process
+KillSignal=SIGTERM
+# Send the signal only to the JVM rather than its control group
+KillMode=process
+# Java process is never killed
+SendSIGKILL=no
+# When a JVM receives a SIGTERM signal it exits with code 143
+SuccessExitStatus=143
+# Allow a slow startup before the systemd notifier module kicks in to extend the timeout
+TimeoutStartSec=180
+[Install]
+WantedBy=multi-user.target
+EOF
+</code></pre><h4 id="create-opensearch-configuration-file">Create opensearch configuration file<a href="#create-opensearch-configuration-file" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>nano /graylog/opensearch/config/opensearch.yml
+</code></pre><pre tabindex="0"><code>cluster.name: graylog
+node.name: ${HOSTNAME}
+path.data: /graylog/opensearch/data
+path.logs: /var/log/opensearch
+network.host: ${HOSTNAME}
+discovery.seed_hosts: [&#34;SERVERNAME01&#34;, &#34;SERVERNAME02&#34;, &#34;SERVERNAME03&#34;]
+cluster.initial_master_nodes: [&#34;SERVERNAME01&#34;, &#34;SERVERNAME02&#34;, &#34;SERVERNAME03&#34;]
+action.auto_create_index: false
+plugins.security.disabled: true
+</code></pre><h4 id="enable-opensearch-system-service">Enable OpenSearch system service<a href="#enable-opensearch-system-service" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>sudo systemctl daemon-reload
+sudo systemctl enable opensearch.service
+sudo systemctl start opensearch.service
+</code></pre><h3 id="install-graylog">Install Graylog<a href="#install-graylog" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<pre tabindex="0"><code>wget https://packages.graylog2.org/repo/packages/graylog-5.0-repository_latest.deb
+sudo dpkg -i graylog-5.0-repository_latest.deb
+sudo apt-get update &amp;&amp; sudo apt-get install graylog-server 
+</code></pre><h5 id="generate-a-password-secret-and-a-root-passwordo">Generate a password secret and a root password.o<a href="#generate-a-password-secret-and-a-root-passwordo" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h5>
+<p>Keep these handy as we&rsquo;ll use them in the next step.</p>
+<h5 id="password-secret">Password Secret<a href="#password-secret" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h5>
+<pre tabindex="0"><code>mkpassword -m sha-512 &lt;password&gt;
+</code></pre><h5 id="root-password">root password<a href="#root-password" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h5>
+<pre tabindex="0"><code>echo -n &#34;Enter Password: &#34; &amp;&amp; head -1 &lt;/dev/stdin | tr -d &#39;\n&#39; | sha256sum | cut -d&#34; &#34; -f1
+</code></pre><h3 id="edit-the-configuration-file-for-graylog">Edit the configuration file for Graylog<a href="#edit-the-configuration-file-for-graylog" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Enter the password secret and the root password into the relevant fields <code>/etc/graylog/server/server.conf</code></p>
+<p>Change the <code>http_bind_address</code> to the ip address or domain name of the server.</p>
+<h4 id="enable-graylog-to-run-at-startup">Enable Graylog to run at startup.<a href="#enable-graylog-to-run-at-startup" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>sudo systemctl daemon-reload
+sudo systemctl enable graylog-server.service
+sudo systemctl start graylog-server.service
+sudo systemctl --type=service --state=active | grep graylog
+</code></pre><h4 id="connect-to-graylog-web-interface">Connect to Graylog web interface<a href="#connect-to-graylog-web-interface" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<pre tabindex="0"><code>&lt;ip-address&gt;:9000
+</code></pre>
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="http://blog.bladewdr.xyz/first-post/">
+                <span class="button__text">First Post</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
