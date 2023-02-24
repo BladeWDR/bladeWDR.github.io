@@ -106,5 +106,6 @@ I ran into this on Pop_OS 22.04 specifically.
 
 ## Links 
 https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109
+
 https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/
 
