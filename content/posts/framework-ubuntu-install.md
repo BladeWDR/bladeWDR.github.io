@@ -6,11 +6,11 @@ url: /framework-ubuntu-install/
 image: images/2020-thumbs/framework-ubuntu-install.jpg
 categories:
   - Linux
-  - Windows
-  - Networking
 tags:
   - Ubuntu
-draft: true
+  - Pop_OS
+  - Framework
+draft: false
 ---
 <!--more-->
 
