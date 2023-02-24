@@ -14,6 +14,91 @@
       
       <guid>http://blog.bladewdr.xyz/framework-ubuntu-install/</guid>
       <description></description>
+      <content>&lt;h1 id=&#34;how-to-configure-framework-laptop-for-ubuntu-based-os&#34;&gt;How to configure Framework laptop for Ubuntu based OS&lt;/h1&gt;
+&lt;p&gt;Created: 2023-02-23 21:57&lt;/p&gt;
+&lt;p&gt;The below is stolen from the official guide provided by framework on their website - cited below.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# This is for 12th Gen ONLY.
+
+# Copy the entire text block below, paste into the terminal, press enter and type your
+
+user&amp;#39;s password as prompted.
+
+# This will:
+
+# - Update your Ubuntu install&amp;#39;s packages.
+
+# - Install the recommended OEM kernel.
+
+# - Workaround needed to get the best suspend battery life for SSD power drain.
+
+# - Disable the ALS sensor so that your brightness keys work.
+
+# - Enable improved fractional scaling support for Ubuntu&amp;#39;s GNOME environment using Wayland.
+
+# - Enable headset mic input.
+
+## *****COPY AND PASTE THIS CODE BELOW*****
+
+sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y &amp;amp;&amp;amp; sudo apt-get install linux-oem-22.04 &amp;amp;&amp;amp; echo &amp;#34;options snd-hda-intel model=dell-headset-multi&amp;#34; | sudo tee -a /etc/modprobe.d/alsa-base.conf &amp;amp;&amp;amp; gsettings set org.gnome.mutter experimental-features &amp;#34;[&amp;#39;scale-monitor-framebuffer&amp;#39;]&amp;#34; &amp;amp;&amp;amp; sudo sed -i &amp;#39;s/^GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash module_blacklist=hid_sensor_hub nvme.noacpi=1&amp;#34;/g&amp;#39; /etc/default/grub &amp;amp;&amp;amp; sudo update-grub &amp;amp;&amp;amp;
+
+echo &amp;#34;[connection]&amp;#34; | sudo tee /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf &amp;amp;&amp;amp; echo &amp;#34;wifi.powersave = 2&amp;#34; | sudo tee -a /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+
+## *****COPY AND PASTE THIS CODE ABOVE*****
+
+## then press enter key, password, reboot.
+
+# If you would rather enter the commands individually instead:
+
+## Updating packages.
+
+sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y
+
+## Install the recommended OEM kernel.
+
+sudo apt install linux-oem-22.04
+
+## Enable headset mic input.
+
+echo &amp;#34;options snd-hda-intel model=dell-headset-multi&amp;#34; | sudo tee -a /etc/modprobe.d/alsa-base.conf
+
+## Enable improved fractional scaling support for Ubuntu&amp;#39;s GNOME environment using Wayland.
+
+gsettings set org.gnome.mutter experimental-features &amp;#34;[&amp;#39;scale-monitor-framebuffer&amp;#39;]&amp;#34;
+
+## Disable the ALS sensor so that your brightness keys work, 12th gen only.
+
+sudo gedit /etc/default/grub
+
+## Append the following to the GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash section.
+
+GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash module_blacklist=hid_sensor_hub&amp;#34;
+
+## Workaround needed to get the best suspend battery life for SSD power drain.
+
+sudo gedit /etc/default/grub
+
+## Append the following to the GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash section.
+
+GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash nvme.noacpi=1&amp;#34;
+
+# Sudo with your fingerprints.
+
+## To run sudo in a terminal with the fingerprint reader, you need to run this command in a terminal and follow the prompts.
+
+sudo pam-auth-update
+
+## Also, if you&amp;#39;ve previously enrolled fingerprints in Windows or another Linux distro, you may find that fingerprint enrollment errors until you manually force clear the stored fingerprints.
+
+https://knowledgebase.frame.work/en_us/fingerprint-enrollment-rkG6YP7xF
+
+## Additional ways to extend battery life can be found at this link: https://community.frame.work/t/linux-battery-life-tuning/6665.
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;for-distros-other-than-ubuntu-you-may-also-need-to-disable-panel-screen-refresh&#34;&gt;For distros other than Ubuntu you may also need to disable panel screen refresh&lt;/h4&gt;
+&lt;p&gt;Only use this if you run into freezing / stuttering issues.
+I ran into this on Pop_OS 22.04 specifically.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo kernelstub -o &amp;quot;i915.enable_psr=0&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&#34;&gt;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&lt;/a&gt;
+&lt;a href=&#34;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&#34;&gt;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&lt;/a&gt;&lt;/p&gt;</content>
     </item>
     
     <item>
@@ -24,6 +109,136 @@
       <guid>http://blog.bladewdr.xyz/posts/graylog-debian-install/</guid>
       <description>This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.
 Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11 echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; | sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.list sudo apt-get update sudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reload sudo systemctl enable mongod.</description>
+      <content>&lt;p&gt;This was tested on 1/17/2023 on Debian 11 and Graylog 5.0
+Using OpenSearch instead of ElasticSearch which is deprecated now.
+This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.&lt;/p&gt;
+&lt;h3 id=&#34;install-prerequisites&#34;&gt;Install prerequisites&lt;/h3&gt;
+&lt;h4 id=&#34;mongodb&#34;&gt;MongoDB&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11
+echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; |
+sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;enable-mongodb-on-system-startup&#34;&gt;Enable MongoDB on system startup&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo systemctl daemon-reload
+sudo systemctl enable mongod.service
+sudo systemctl restart mongod.service
+sudo systemctl --type=service --state=active | grep mongod
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;opensearch&#34;&gt;OpenSearch&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://artifacts.opensearch.org/releases/bundle/opensearch/1.3.4/opensearch-1.3.4-linux-x64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Disable memory paging and swapping to improve performance.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo swapoff -a
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Increase the number of memory maps available to OpenSearch.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Edit the sysctl config file
+sudo vi /etc/sysctl.conf
+
+# Add a line to define the desired value
+# or change the value if the key exists,
+# and then save your changes.
+vm.max_map_count=262144
+
+# Reload the kernel parameters using sysctl
+sudo sysctl -p
+
+# Verify that the change was applied by checking the value
+cat /proc/sys/vm/max_map_count
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;create-opensearch-user&#34;&gt;Create OpenSearch User&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo adduser --system --disabled-password --disabled-login --home /var/empty --no-create-home --quiet --force-badname --group opensearch
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;create-directories-and-extract-the-opensearch-archive-you-downloaded-earlier&#34;&gt;Create directories and extract the OpenSearch archive you downloaded earlier&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo mkdir -p /graylog/opensearch/data
+sudo mkdir /var/log/opensearch
+
+tar -xzvf opensearch-1.3.4-linux-x64.tar.gz
+sudo mv opensearch-1.3.4/* /graylog/opensearch
+
+
+#Set Permissions
+sudo chown -R opensearch:opensearch /graylog/opensearch/
+sudo chown -R opensearch:opensearch /var/log/opensearch
+sudo chmod -R 2750 /graylog/opensearch/
+sudo chmod -R 2750 /var/log/opensearch
+
+#Create empty log file
+sudo -u opensearch touch /var/log/opensearch/graylog.log
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;create-a-system-service-for-opensearch&#34;&gt;Create a system service for opensearch&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+sudo su
+
+cat &amp;gt; /etc/systemd/system/opensearch.service &amp;lt;&amp;lt;EOF
+[Unit]
+Description=Opensearch
+Documentation=https://opensearch.org/docs/latest
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+ConditionPathExists=/graylog/opensearch
+ConditionPathExists=/graylog/opensearch/data
+[Service]
+Environment=OPENSEARCH_HOME=/graylog/opensearch
+Environment=OPENSEARCH_PATH_CONF=/graylog/opensearch/config
+ReadWritePaths=/var/log/opensearch
+User=opensearch
+Group=opensearch
+WorkingDirectory=/graylog/opensearch
+ExecStart=/graylog/opensearch/bin/opensearch
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE=65535
+# Specifies the maximum number of processes
+LimitNPROC=4096
+# Specifies the maximum size of virtual memory
+LimitAS=infinity
+# Specifies the maximum file size
+LimitFSIZE=infinity
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=0
+# SIGTERM signal is used to stop the Java process
+KillSignal=SIGTERM
+# Send the signal only to the JVM rather than its control group
+KillMode=process
+# Java process is never killed
+SendSIGKILL=no
+# When a JVM receives a SIGTERM signal it exits with code 143
+SuccessExitStatus=143
+# Allow a slow startup before the systemd notifier module kicks in to extend the timeout
+TimeoutStartSec=180
+[Install]
+WantedBy=multi-user.target
+EOF
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;create-opensearch-configuration-file&#34;&gt;Create opensearch configuration file&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;nano /graylog/opensearch/config/opensearch.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cluster.name: graylog
+node.name: ${HOSTNAME}
+path.data: /graylog/opensearch/data
+path.logs: /var/log/opensearch
+network.host: ${HOSTNAME}
+discovery.seed_hosts: [&amp;#34;SERVERNAME01&amp;#34;, &amp;#34;SERVERNAME02&amp;#34;, &amp;#34;SERVERNAME03&amp;#34;]
+cluster.initial_master_nodes: [&amp;#34;SERVERNAME01&amp;#34;, &amp;#34;SERVERNAME02&amp;#34;, &amp;#34;SERVERNAME03&amp;#34;]
+action.auto_create_index: false
+plugins.security.disabled: true
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;enable-opensearch-system-service&#34;&gt;Enable OpenSearch system service&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo systemctl daemon-reload
+sudo systemctl enable opensearch.service
+sudo systemctl start opensearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;install-graylog&#34;&gt;Install Graylog&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://packages.graylog2.org/repo/packages/graylog-5.0-repository_latest.deb
+sudo dpkg -i graylog-5.0-repository_latest.deb
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install graylog-server 
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;generate-a-password-secret-and-a-root-passwordo&#34;&gt;Generate a password secret and a root password.o&lt;/h5&gt;
+&lt;p&gt;Keep these handy as we&amp;rsquo;ll use them in the next step.&lt;/p&gt;
+&lt;h5 id=&#34;password-secret&#34;&gt;Password Secret&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkpassword -m sha-512 &amp;lt;password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;root-password&#34;&gt;root password&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo -n &amp;#34;Enter Password: &amp;#34; &amp;amp;&amp;amp; head -1 &amp;lt;/dev/stdin | tr -d &amp;#39;\n&amp;#39; | sha256sum | cut -d&amp;#34; &amp;#34; -f1
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;edit-the-configuration-file-for-graylog&#34;&gt;Edit the configuration file for Graylog&lt;/h3&gt;
+&lt;p&gt;Enter the password secret and the root password into the relevant fields &lt;code&gt;/etc/graylog/server/server.conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Change the &lt;code&gt;http_bind_address&lt;/code&gt; to the ip address or domain name of the server.&lt;/p&gt;
+&lt;h4 id=&#34;enable-graylog-to-run-at-startup&#34;&gt;Enable Graylog to run at startup.&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo systemctl daemon-reload
+sudo systemctl enable graylog-server.service
+sudo systemctl start graylog-server.service
+sudo systemctl --type=service --state=active | grep graylog
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;connect-to-graylog-web-interface&#34;&gt;Connect to Graylog web interface&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;ip-address&amp;gt;:9000
+&lt;/code&gt;&lt;/pre&gt;</content>
     </item>
     
     <item>
@@ -33,6 +248,12 @@ Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubunt
       
       <guid>http://blog.bladewdr.xyz/first-post/</guid>
       <description></description>
+      <content>&lt;h3 id=&#34;first-post-on-the-new-site&#34;&gt;First post on the new site.&lt;/h3&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed efficitur massa, at pellentesque dui. Aliquam et erat congue, mollis diam nec, dignissim dolor. Proin in convallis nisi. Praesent vitae viverra arcu. Mauris sollicitudin neque non cursus iaculis. Mauris aliquet lacinia porta. Integer vel iaculis felis. Aenean nibh lacus, pellentesque in tristique id, rhoncus vel eros.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Donec molestie rhoncus purus, ac aliquet ex vulputate sed. Integer vitae ante non augue tincidunt egestas et molestie nulla. Nunc et nunc in lacus porttitor faucibus. Nulla non condimentum elit. Nam tincidunt odio mattis aliquet lobortis. Quisque odio ante, tincidunt non volutpat at, congue quis elit. Etiam finibus ornare scelerisque.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Aliquam condimentum nulla ac libero accumsan suscipit. Nullam in diam bibendum, volutpat eros ut, dignissim justo. Nam ornare feugiat dolor ac porttitor. Proin rhoncus nibh vel felis ultricies consequat. Nullam accumsan neque neque, eget iaculis risus feugiat ut. Vestibulum volutpat nec lectus ac lobortis. Nunc sollicitudin felis id dignissim finibus. Morbi consequat turpis nec diam finibus, a euismod nisi vehicula. Quisque volutpat ipsum id lectus viverra, sed rutrum purus tempus. Praesent vestibulum facilisis nunc. Aliquam a quam auctor, tempor quam luctus, egestas risus.&lt;/p&gt;
+&lt;p&gt;Aliquam rhoncus leo eu sodales varius. Duis quis enim et nisl malesuada feugiat a a felis. Nunc eget neque eu purus consectetur mollis. Integer ut justo sit amet enim varius placerat. Curabitur id tortor cursus, semper diam eget, rutrum massa. Maecenas pharetra feugiat nisi eget suscipit. Pellentesque risus diam, iaculis nec ipsum a, hendrerit imperdiet orci. Proin bibendum eget lorem vel euismod. Vivamus a faucibus sapien, a elementum dui. Nulla facilisis vehicula posuere. Donec consequat sem in volutpat suscipit. Ut id elementum lectus. Sed pellentesque est felis, hendrerit vehicula metus gravida et.&lt;/p&gt;
+&lt;p&gt;Curabitur aliquam mi risus, id elementum augue dapibus ut. Nunc feugiat justo sit amet tempor auctor. Fusce blandit lacinia lobortis. Morbi mollis urna leo, sit amet semper diam fermentum sed. Maecenas augue urna, imperdiet non fermentum nec, facilisis eget mauris. Quisque rhoncus quam erat, ut sollicitudin metus rhoncus sit amet. Proin tincidunt dictum orci, a tincidunt quam porta ut.&lt;/p&gt;</content>
     </item>
     
   </channel>

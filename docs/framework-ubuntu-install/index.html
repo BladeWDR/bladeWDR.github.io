@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Framework Ubuntu Install :: Tech Guides for Dipshits</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://blog.bladewdr.xyz/framework-ubuntu-install/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="http://blog.bladewdr.xyz/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/bladewdr/" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Framework Ubuntu Install">
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.bladewdr.xyz/framework-ubuntu-install/" />
+<meta property="og:site_name" content="Tech Guides for Dipshits" />
+
+  
+    <meta property="og:image" content="http://blog.bladewdr.xyz/img/favicon/red.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+  <meta property="article:section" content="Linux" />
+
+
+  <meta property="article:published_time" content="2023-02-23 22:15:57 -0500 EST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Blade&#39;s Tech Stuff
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://blog.bladewdr.xyz/framework-ubuntu-install/">Framework Ubuntu Install</a>
+  </h1>
+  <div class="post-meta">
+    
+      <time class="post-date">
+        2023-02-23 ::
+        
+      </time>
+    
+    
+    
+      <span class="post-reading-time">:: 3 min read (432 words)</span>
+    
+  </div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://blog.bladewdr.xyz/tags/ubuntu/">Ubuntu</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/pop_os/">Pop_OS</a>&nbsp;
+      
+      #<a href="http://blog.bladewdr.xyz/tags/framework/">Framework</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <h1 id="how-to-configure-framework-laptop-for-ubuntu-based-os">How to configure Framework laptop for Ubuntu based OS<a href="#how-to-configure-framework-laptop-for-ubuntu-based-os" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Created: 2023-02-23 21:57</p>
+<p>The below is stolen from the official guide provided by framework on their website - cited below.</p>
+<pre tabindex="0"><code># This is for 12th Gen ONLY.
+
+# Copy the entire text block below, paste into the terminal, press enter and type your
+
+user&#39;s password as prompted.
+
+# This will:
+
+# - Update your Ubuntu install&#39;s packages.
+
+# - Install the recommended OEM kernel.
+
+# - Workaround needed to get the best suspend battery life for SSD power drain.
+
+# - Disable the ALS sensor so that your brightness keys work.
+
+# - Enable improved fractional scaling support for Ubuntu&#39;s GNOME environment using Wayland.
+
+# - Enable headset mic input.
+
+## *****COPY AND PASTE THIS CODE BELOW*****
+
+sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt-get install linux-oem-22.04 &amp;&amp; echo &#34;options snd-hda-intel model=dell-headset-multi&#34; | sudo tee -a /etc/modprobe.d/alsa-base.conf &amp;&amp; gsettings set org.gnome.mutter experimental-features &#34;[&#39;scale-monitor-framebuffer&#39;]&#34; &amp;&amp; sudo sed -i &#39;s/^GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet splash module_blacklist=hid_sensor_hub nvme.noacpi=1&#34;/g&#39; /etc/default/grub &amp;&amp; sudo update-grub &amp;&amp;
+
+echo &#34;[connection]&#34; | sudo tee /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf &amp;&amp; echo &#34;wifi.powersave = 2&#34; | sudo tee -a /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+
+## *****COPY AND PASTE THIS CODE ABOVE*****
+
+## then press enter key, password, reboot.
+
+# If you would rather enter the commands individually instead:
+
+## Updating packages.
+
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+## Install the recommended OEM kernel.
+
+sudo apt install linux-oem-22.04
+
+## Enable headset mic input.
+
+echo &#34;options snd-hda-intel model=dell-headset-multi&#34; | sudo tee -a /etc/modprobe.d/alsa-base.conf
+
+## Enable improved fractional scaling support for Ubuntu&#39;s GNOME environment using Wayland.
+
+gsettings set org.gnome.mutter experimental-features &#34;[&#39;scale-monitor-framebuffer&#39;]&#34;
+
+## Disable the ALS sensor so that your brightness keys work, 12th gen only.
+
+sudo gedit /etc/default/grub
+
+## Append the following to the GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet splash section.
+
+GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet splash module_blacklist=hid_sensor_hub&#34;
+
+## Workaround needed to get the best suspend battery life for SSD power drain.
+
+sudo gedit /etc/default/grub
+
+## Append the following to the GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet splash section.
+
+GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet splash nvme.noacpi=1&#34;
+
+# Sudo with your fingerprints.
+
+## To run sudo in a terminal with the fingerprint reader, you need to run this command in a terminal and follow the prompts.
+
+sudo pam-auth-update
+
+## Also, if you&#39;ve previously enrolled fingerprints in Windows or another Linux distro, you may find that fingerprint enrollment errors until you manually force clear the stored fingerprints.
+
+https://knowledgebase.frame.work/en_us/fingerprint-enrollment-rkG6YP7xF
+
+## Additional ways to extend battery life can be found at this link: https://community.frame.work/t/linux-battery-life-tuning/6665.
+</code></pre><h4 id="for-distros-other-than-ubuntu-you-may-also-need-to-disable-panel-screen-refresh">For distros other than Ubuntu you may also need to disable panel screen refresh<a href="#for-distros-other-than-ubuntu-you-may-also-need-to-disable-panel-screen-refresh" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>Only use this if you run into freezing / stuttering issues.
+I ran into this on Pop_OS 22.04 specifically.</p>
+<p><code>sudo kernelstub -o &quot;i915.enable_psr=0&quot;</code></p>
+<h2 id="links">Links<a href="#links" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p><a href="https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109">https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109</a>
+<a href="https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/">https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/</a></p>
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="http://blog.bladewdr.xyz/posts/graylog-debian-install/">
+                <span class="button__text">How to install Graylog on Debian 11 (single node)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
