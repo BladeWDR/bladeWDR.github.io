@@ -6,7 +6,16 @@
     <description>Recent content on Tech Guides for Dipshits</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Feb 2023 22:15:57 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Framework Ubuntu Install</title>
+      <link>http://blog.bladewdr.xyz/framework-ubuntu-install/</link>
+      <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/framework-ubuntu-install/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>How to install Graylog on Debian 11 (single node)</title>
       <link>http://blog.bladewdr.xyz/posts/graylog-debian-install/</link>

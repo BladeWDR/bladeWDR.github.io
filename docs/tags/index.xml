@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Tech Guides for Dipshits</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Feb 2023 22:15:57 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Framework</title>
+      <link>http://blog.bladewdr.xyz/tags/framework/</link>
+      <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pop_OS</title>
+      <link>http://blog.bladewdr.xyz/tags/pop_os/</link>
+      <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/pop_os/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>http://blog.bladewdr.xyz/tags/ubuntu/</link>
+      <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>debian</title>
       <link>http://blog.bladewdr.xyz/tags/debian/</link>
@@ -49,15 +76,6 @@
       <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
       
       <guid>http://blog.bladewdr.xyz/tags/tutorial/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ubuntu</title>
-      <link>http://blog.bladewdr.xyz/tags/ubuntu/</link>
-      <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/tags/ubuntu/</guid>
       <description></description>
     </item>
     

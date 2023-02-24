@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pop_OS on Tech Guides for Dipshits</title>
+    <link>http://blog.bladewdr.xyz/tags/pop_os/</link>
+    <description>Recent content in Pop_OS on Tech Guides for Dipshits</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Feb 2023 22:15:57 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/pop_os/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Framework Ubuntu Install</title>
+      <link>http://blog.bladewdr.xyz/framework-ubuntu-install/</link>
+      <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/framework-ubuntu-install/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
