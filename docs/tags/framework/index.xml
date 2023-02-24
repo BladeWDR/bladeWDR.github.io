@@ -97,8 +97,8 @@ https://knowledgebase.frame.work/en_us/fingerprint-enrollment-rkG6YP7xF
 I ran into this on Pop_OS 22.04 specifically.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;sudo kernelstub -o &amp;quot;i915.enable_psr=0&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&#34;&gt;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&lt;/a&gt;
-&lt;a href=&#34;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&#34;&gt;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;a href=&#34;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&#34;&gt;https://guides.frame.work/Guide/Ubuntu+22.04+LTS+Installation+on+the+Framework+Laptop/109&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&#34;&gt;https://www.reddit.com/r/framework/comments/10zeoyu/anyone_experiencing_random_freezing_on_pop_os_2204/&lt;/a&gt;&lt;/p&gt;</content>
     </item>
     
   </channel>
