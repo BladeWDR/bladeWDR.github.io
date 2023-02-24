@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   
-    <title>How to install Graylog on Debian 11 (single node) :: Tech Guides for Dipshits</title>
+    <title>How to install Graylog 5.0 on Debian 11 (single node) :: Blade&#39;s Tech Stuff</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,11 +47,11 @@ Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubunt
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="How to install Graylog on Debian 11 (single node)">
+<meta property="og:title" content="How to install Graylog 5.0 on Debian 11 (single node)">
 <meta property="og:description" content="This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.
 Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11 echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; | sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.list sudo apt-get update sudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reload sudo systemctl enable mongod." />
 <meta property="og:url" content="http://blog.bladewdr.xyz/posts/graylog-debian-install/" />
-<meta property="og:site_name" content="Tech Guides for Dipshits" />
+<meta property="og:site_name" content="Blade&#39;s Tech Stuff" />
 
   
   
@@ -130,7 +130,7 @@ Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubunt
     
 <article class="post">
   <h1 class="post-title">
-    <a href="http://blog.bladewdr.xyz/posts/graylog-debian-install/">How to install Graylog on Debian 11 (single node)</a>
+    <a href="http://blog.bladewdr.xyz/posts/graylog-debian-install/">How to install Graylog 5.0 on Debian 11 (single node)</a>
   </h1>
   <div class="post-meta">
     
@@ -327,17 +327,10 @@ sudo systemctl --type=service --state=active | grep graylog
         <span class="button previous">
             <a href="http://blog.bladewdr.xyz/framework-ubuntu-install/">
                 <span class="button__icon">←</span>
-                <span class="button__text">Framework Ubuntu Install</span>
+                <span class="button__text">How to install an Ubuntu based OS on the Framework Laptop</span>
             </a>
         </span>
         
-        
-        <span class="button next">
-            <a href="http://blog.bladewdr.xyz/first-post/">
-                <span class="button__text">First Post</span>
-                <span class="button__icon">→</span>
-            </a>
-        </span>
         
     </div>
 </div>

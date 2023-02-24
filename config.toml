@@ -1,5 +1,5 @@
 baseurl = "http://blog.bladewdr.xyz/"
-#title = "tech guides for dipshits, by a dipshit."
+title = "Blade's Tech Stuff"
 languageCode = "en-us"
 paginate = 5
 theme='hugo-theme-terminal'
@@ -68,7 +68,7 @@ publishdirorig = "docs"
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Tech Guides for Dipshits"
+    title = "Blade's Tech Stuff"
     subtitle = "test"
     owner = ""
     keywords = ""

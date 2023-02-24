@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://blog.bladewdr.xyz/</loc>
+    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
+  </url><url>
     <loc>http://blog.bladewdr.xyz/categories/</loc>
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
   </url><url>
@@ -21,9 +24,6 @@
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/</loc>
-    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/</loc>
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/ubuntu/</loc>
@@ -46,15 +46,6 @@
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/tutorial/</loc>
     <lastmod>2023-01-17T23:00:46-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/first-post/</loc>
-    <lastmod>2023-01-16T20:32:38-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/categories/networking/</loc>
-    <lastmod>2023-01-16T20:32:38-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/categories/windows/</loc>
-    <lastmod>2023-01-16T20:32:38-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/about/</loc>
     <priority>0</priority>

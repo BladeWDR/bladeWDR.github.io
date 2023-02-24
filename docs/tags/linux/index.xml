@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>linux on Tech Guides for Dipshits</title>
+    <title>linux on Blade&#39;s Tech Stuff</title>
     <link>http://blog.bladewdr.xyz/tags/linux/</link>
-    <description>Recent content in linux on Tech Guides for Dipshits</description>
+    <description>Recent content in linux on Blade&#39;s Tech Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>How to install Graylog on Debian 11 (single node)</title>
+      <title>How to install Graylog 5.0 on Debian 11 (single node)</title>
       <link>http://blog.bladewdr.xyz/posts/graylog-debian-install/</link>
       <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
       

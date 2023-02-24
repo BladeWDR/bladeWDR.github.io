@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Tech Guides for Dipshits</title>
+    <title>Categories on Blade&#39;s Tech Stuff</title>
     <link>http://blog.bladewdr.xyz/categories/</link>
-    <description>Recent content in Categories on Tech Guides for Dipshits</description>
+    <description>Recent content in Categories on Blade&#39;s Tech Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 23 Feb 2023 22:15:57 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
@@ -13,26 +13,6 @@
       <pubDate>Thu, 23 Feb 2023 22:15:57 -0500</pubDate>
       
       <guid>http://blog.bladewdr.xyz/categories/linux/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>Networking</title>
-      <link>http://blog.bladewdr.xyz/categories/networking/</link>
-      <pubDate>Mon, 16 Jan 2023 20:32:38 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/categories/networking/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>Windows</title>
-      <link>http://blog.bladewdr.xyz/categories/windows/</link>
-      <pubDate>Mon, 16 Jan 2023 20:32:38 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/categories/windows/</guid>
       <description></description>
       <content></content>
     </item>

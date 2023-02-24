@@ -1,5 +1,5 @@
 +++
-title = "How to install Graylog on Debian 11 (single node)"
+title = "How to install Graylog 5.0 on Debian 11 (single node)"
 date = "2023-01-17T23:00:46-05:00"
 author = ""
 authorTwitter = "" #do not include @

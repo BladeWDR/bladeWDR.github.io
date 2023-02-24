@@ -1,5 +1,5 @@
 ---
-title: "Framework Ubuntu Install"
+title: "How to install an Ubuntu based OS on the Framework Laptop"
 
 date: 2023-02-23T22:15:57-05:00
 url: /framework-ubuntu-install/
