@@ -56,9 +56,7 @@ Okay, we're ready to use the geoip matching in iptables.
 
 ### 5. Allow or deny traffic based on geolocation! 
 
-My favorite way to do this is to have the default DENY policy, and whitelist only the countries I want to be able to access my servers. In my case, the US.
-
-`iptables -I INPUT -m geoip --src-cc US -j ACCEPT`
+My favorite way to do this is to have the default DENY policy for the INPUT chain be DROP, and whitelist only the countries I want to be able to access my servers. In my case, the US.
 
 Add a command at the top of your INPUT chain to allow responses from outgoing connections. (only required if you want to set your default policy to DROP)
 

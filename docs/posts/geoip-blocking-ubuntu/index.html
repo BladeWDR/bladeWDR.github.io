@@ -205,8 +205,7 @@ mkdir /usr/share/xt_geoip
 ./xt_geoip_build -D /usr/share/xt_geoip *.csv
 </code></pre><p>Okay, we&rsquo;re ready to use the geoip matching in iptables.</p>
 <h3 id="5-allow-or-deny-traffic-based-on-geolocation">5. Allow or deny traffic based on geolocation!<a href="#5-allow-or-deny-traffic-based-on-geolocation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
-<p>My favorite way to do this is to have the default DENY policy, and whitelist only the countries I want to be able to access my servers. In my case, the US.</p>
-<p><code>iptables -I INPUT -m geoip --src-cc US -j ACCEPT</code></p>
+<p>My favorite way to do this is to have the default DENY policy for the INPUT chain be DROP, and whitelist only the countries I want to be able to access my servers. In my case, the US.</p>
 <p>Add a command at the top of your INPUT chain to allow responses from outgoing connections. (only required if you want to set your default policy to DROP)</p>
 <p>This is because when you set the default policy to DROP, even the responses from outgoing connections that YOU made will get dropped.</p>
 <p><code>iptables -I INPUT 1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></p>
