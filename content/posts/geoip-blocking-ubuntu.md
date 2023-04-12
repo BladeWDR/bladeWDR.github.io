@@ -60,13 +60,19 @@ My favorite way to do this is to have the default DENY policy, and whitelist onl
 
 `iptables -I INPUT -m geoip --src-cc US -j ACCEPT`
 
-`iptables --policy INPUT DROP`
+Add a command at the top of your INPUT chain to allow responses from outgoing connections. (only required if you want to set your default policy to DROP)
 
+This is because when you set the default policy to DROP, even the responses from outgoing connections that YOU made will get dropped.
 
-Feel free to get a little more fancy and only allow specific ports. (Like SSH!)
+`iptables -I INPUT 1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT`
+
+I'd make sure you set a rule to allow your ssh connection before changing the default policy (to avoid getting kicked out and not being able to get back in.)
 
 `iptables -I INPUT -p tcp --dport 22 -m geoip --src-cc US -j ACCEPT`
 
+Set the default policy
+
+`iptables --policy INPUT DROP`
 
 ### 6. Install the iptables-persistent package to make your iptables rules survive reboots.
 
