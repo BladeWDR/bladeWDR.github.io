@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://blog.bladewdr.xyz/</loc>
-    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/firewall/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/posts/geoip-blocking-ubuntu/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/iptables/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/jammy/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/posts/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/ubuntu/</loc>
+    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/categories/</loc>
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
@@ -18,15 +39,6 @@
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/pop_os/</loc>
-    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/posts/</loc>
-    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/tags/</loc>
-    <lastmod>2023-02-23T22:15:57-05:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/tags/ubuntu/</loc>
     <lastmod>2023-02-23T22:15:57-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/debian/</loc>

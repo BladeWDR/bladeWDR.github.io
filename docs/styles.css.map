@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "C:/Users/Scott/blog",
+	"sourceRoot": "C:/Users/Scott/git/bladeWDR.github.io",
 	"sources": [
 		"css/base.scss",
 		"themes/hugo-theme-terminal/assets/css/variables.scss",

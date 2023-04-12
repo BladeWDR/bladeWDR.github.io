@@ -6,7 +6,56 @@
     <description>Recent content on Blade&#39;s Tech Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Feb 2023 22:15:57 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Apr 2023 20:55:05 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Geoip Blocking in Ubuntu 22.04 using iptables</title>
+      <link>http://blog.bladewdr.xyz/posts/geoip-blocking-ubuntu/</link>
+      <pubDate>Mon, 10 Apr 2023 20:55:05 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/posts/geoip-blocking-ubuntu/</guid>
+      <description>Blocking connections based on geolocation in Ubuntu 22.04, using iptables and xtables-addons Steps: First note: all of these steps assume you&amp;rsquo;re logged in as root. Make sure you give it the &amp;lsquo;ol sudo su if you&amp;rsquo;re not already root.
+1. First, update your system. apt-get update &amp;amp;&amp;amp; apt-get upgrade
+2. Now install some dependencies. apt-get install libxtables-dev xtables-addons-common libtext-csv-xs-perl pkg-config
+Note: on older versions of Ubuntu, substitute libxtables-dev for iptables-dev.</description>
+      <content>&lt;h1 id=&#34;blocking-connections-based-on-geolocation-in-ubuntu-2204-using-iptables-and-xtables-addons&#34;&gt;Blocking connections based on geolocation in Ubuntu 22.04, using iptables and xtables-addons&lt;/h1&gt;
+&lt;h3 id=&#34;steps&#34;&gt;Steps:&lt;/h3&gt;
+&lt;p&gt;First note: all of these steps assume you&amp;rsquo;re logged in as root. Make sure you give it the &amp;lsquo;ol &lt;code&gt;sudo su&lt;/code&gt; if you&amp;rsquo;re not already root.&lt;/p&gt;
+&lt;h3 id=&#34;1-first-update-your-system&#34;&gt;1. First, update your system.&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;apt-get update &amp;amp;&amp;amp; apt-get upgrade&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-now-install-some-dependencies&#34;&gt;2. Now install some dependencies.&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;apt-get install libxtables-dev xtables-addons-common libtext-csv-xs-perl pkg-config&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Note: on older versions of Ubuntu, substitute &lt;code&gt;libxtables-dev&lt;/code&gt; for &lt;code&gt;iptables-dev&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;3-download-xtables-addon-untar-and-configure-replace&#34;&gt;3. Download xtables addon, untar and configure. Replace&lt;/h3&gt;
+&lt;p&gt;Get the latest version of the xtables-addons package from here &lt;a href=&#34;https://inai.de/files/xtables-addons/&#34;&gt;https://inai.de/files/xtables-addons/&lt;/a&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://inai.de/files/xtables-addons/xtables-addons-3.23.tar.xz
+tar xf xtables-addons-3.23.tar.xz
+cd xtables-addons-3.23
+./configure
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4-download-and-build-db-ip-definitions&#34;&gt;4. Download and build DB-IP definitions.&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd geoip
+./xt_geoip_dl
+mkdir /usr/share/xt_geoip
+./xt_geoip_build -D /usr/share/xt_geoip *.csv
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Okay, we&amp;rsquo;re ready to use the geoip matching in iptables.&lt;/p&gt;
+&lt;h3 id=&#34;5-allow-or-deny-traffic-based-on-geolocation&#34;&gt;5. Allow or deny traffic based on geolocation!&lt;/h3&gt;
+&lt;p&gt;My favorite way to do this is to have the default DENY policy, and whitelist only the countries I want to be able to access my servers. In my case, the US.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT -m geoip --src-cc US -j ACCEPT&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Add a command at the top of your INPUT chain to allow responses from outgoing connections. (only required if you want to set your default policy to DROP)&lt;/p&gt;
+&lt;p&gt;This is because when you set the default policy to DROP, even the responses from outgoing connections that YOU made will get dropped.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT 1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d make sure you set a rule to allow your ssh connection before changing the default policy (to avoid getting kicked out and not being able to get back in.)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT -p tcp --dport 22 -m geoip --src-cc US -j ACCEPT&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Set the default policy&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables --policy INPUT DROP&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;6-install-the-iptables-persistent-package-to-make-your-iptables-rules-survive-reboots&#34;&gt;6. Install the iptables-persistent package to make your iptables rules survive reboots.&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install iptables-persistent&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Don&amp;rsquo;t forget that if you make a change later on, you&amp;rsquo;ll need to save again!&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netfilter-persistent save&lt;/code&gt;&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>How to install an Ubuntu based OS on the Framework Laptop</title>
       <link>http://blog.bladewdr.xyz/framework-ubuntu-install/</link>
@@ -108,7 +157,7 @@ I ran into this on Pop_OS 22.04 specifically.&lt;/p&gt;
       
       <guid>http://blog.bladewdr.xyz/posts/graylog-debian-install/</guid>
       <description>This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.
-Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11 echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; | sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.list sudo apt-get update sudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reload sudo systemctl enable mongod.</description>
+Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11echo &amp;#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&amp;#34; |sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.listsudo apt-get updatesudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reloadsudo systemctl enable mongod.</description>
       <content>&lt;p&gt;This was tested on 1/17/2023 on Debian 11 and Graylog 5.0
 Using OpenSearch instead of ElasticSearch which is deprecated now.
 This is for a single node&amp;hellip; multiple nodes is something that I have yet to look into.&lt;/p&gt;
