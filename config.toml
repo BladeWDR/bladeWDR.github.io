@@ -1,5 +1,5 @@
 baseurl = "http://blog.bladewdr.xyz/"
-title = "Blade's Tech Stuff"
+title = "Blade Server - A Homelabber's Blog"
 languageCode = "en-us"
 paginate = 5
 theme='hugo-theme-terminal'
@@ -68,7 +68,7 @@ publishdirorig = "docs"
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Blade's Tech Stuff"
+    title = "Blade Server - A Homelabber's Blog"
     subtitle = "test"
     owner = ""
     keywords = ""
@@ -82,7 +82,7 @@ publishdirorig = "docs"
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Blade's Tech Stuff"
+      logoText = "Blade Server - A Homelabber's Blog"
       logoHomeLink = "/"
 
     [languages.en.menu]
