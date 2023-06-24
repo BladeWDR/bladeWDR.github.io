@@ -6,7 +6,47 @@
     <description>Recent content in Tags on Blade Server - A Homelabber&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Apr 2023 20:55:05 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jun 2023 21:11:41 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux</title>
+      <link>http://blog.bladewdr.xyz/tags/linux/</link>
+      <pubDate>Fri, 23 Jun 2023 21:11:41 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/linux/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>logind.conf</title>
+      <link>http://blog.bladewdr.xyz/tags/logind.conf/</link>
+      <pubDate>Fri, 23 Jun 2023 21:11:41 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/logind.conf/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>systemd</title>
+      <link>http://blog.bladewdr.xyz/tags/systemd/</link>
+      <pubDate>Fri, 23 Jun 2023 21:11:41 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/systemd/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>tutorial</title>
+      <link>http://blog.bladewdr.xyz/tags/tutorial/</link>
+      <pubDate>Fri, 23 Jun 2023 21:11:41 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/tags/tutorial/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
     <item>
       <title>firewall</title>
       <link>http://blog.bladewdr.xyz/tags/firewall/</link>
@@ -88,31 +128,11 @@
     </item>
     
     <item>
-      <title>linux</title>
-      <link>http://blog.bladewdr.xyz/tags/linux/</link>
-      <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/tags/linux/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
       <title>logging</title>
       <link>http://blog.bladewdr.xyz/tags/logging/</link>
       <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
       
       <guid>http://blog.bladewdr.xyz/tags/logging/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>tutorial</title>
-      <link>http://blog.bladewdr.xyz/tags/tutorial/</link>
-      <pubDate>Tue, 17 Jan 2023 23:00:46 -0500</pubDate>
-      
-      <guid>http://blog.bladewdr.xyz/tags/tutorial/</guid>
       <description></description>
       <content></content>
     </item>

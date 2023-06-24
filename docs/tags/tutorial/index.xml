@@ -6,7 +6,51 @@
     <description>Recent content in tutorial on Blade Server - A Homelabber&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jan 2023 23:00:46 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jun 2023 21:11:41 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shut down your laptop automatically when clamshelled using systemd</title>
+      <link>http://blog.bladewdr.xyz/posts/clamshell-shutdown/</link>
+      <pubDate>Fri, 23 Jun 2023 21:11:41 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/posts/clamshell-shutdown/</guid>
+      <description>Set laptop to shut down automatically on lid close in Linux This applies specifically to Linux systems running systemd - though that covers most distros currently available. I&amp;rsquo;m doing this on Ubuntu 23.04.
+Some background - I currently work at a very small MSP in New York State as general IT tech / system admin / network engineer / floor polisher. As a part of my job I&amp;rsquo;m constantly in and out from different job sites, often requiring the use of my laptop.</description>
+      <content>&lt;h4 id=&#34;set-laptop-to-shut-down-automatically-on-lid-close-in-linux&#34;&gt;Set laptop to shut down automatically on lid close in Linux&lt;/h4&gt;
+&lt;p&gt;This applies specifically to Linux systems running systemd - though that covers most distros currently available. I&amp;rsquo;m doing this on Ubuntu 23.04.&lt;/p&gt;
+&lt;p&gt;Some background - I currently work at a very small MSP in New York State as general IT tech / system admin / network engineer / floor polisher. As a part of my job I&amp;rsquo;m constantly in and out from different job sites, often requiring the use of my laptop.&lt;/p&gt;
+&lt;p&gt;I constantly run into the issue, as I&amp;rsquo;m sure many of you have, of my laptop simply having a dead or nearly dead battery after pulling it out of my go bag.&lt;/p&gt;
+&lt;p&gt;Frustratingly, most if not all manufacturers in recent years have not properly implemented sleep functionality, resulting in more battery drain while suspended.&lt;/p&gt;
+&lt;p&gt;I decided to look into how I could fix this problem by having my laptop automatically shut down when I clamshell it.&lt;/p&gt;
+&lt;p&gt;Unfortunately, GNOME as of time of writing does not have power management features built in to accomplish this task, so we must venture into the terminal.&lt;/p&gt;
+&lt;p&gt;To accomplish this task, we will be overriding the systemd-logind service configuration file &lt;code&gt;/etc/logind.conf&lt;/code&gt;. You could also edit the file directly, but it&amp;rsquo;s better practice to use an override, so that an update does not erase your changes by overwriting the file.&lt;/p&gt;
+&lt;h4 id=&#34;create-a-new-file-using-your-text-editor-choice-called-usrlibsystemdlogindconfdoverridesconf&#34;&gt;Create a new file using your text editor choice called &lt;code&gt;/usr/lib/systemd/logind.conf.d/overrides.conf&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;`sudo vim /usr/lib/systemd/logind.conf.d/overrides.conf`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;edit-the-file-to-contain-these-lines-the-second-line-is-optional&#34;&gt;Edit the file to contain these lines. The second line is optional.&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;HandleLidSwitch=poweroff
+HandleLidSwitchExternalPower=ignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;restart-systemd-logindservice&#34;&gt;Restart systemd-logind.service.&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note that the following will log you out!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo systemctl restart systemd-logind
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;try-it-out&#34;&gt;Try it out&lt;/h4&gt;
+&lt;p&gt;Log back in and clamshell your laptop. Did it shut down?&lt;/p&gt;
+&lt;h4 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h4&gt;
+&lt;p&gt;If, like me, you run into problems where your laptop is not following the behavior that you set, here are some basic troubleshooting steps.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Check for syntax errors. These files are case sensitive, did you spell things correct, do you have the correct case?&lt;/li&gt;
+&lt;li&gt;And the one that I personally ran up against - other programs inhibiting &lt;code&gt;handle-lid-switch&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;systemd-inhibit --list&lt;/code&gt;. Look for any programs listing &lt;code&gt;What&lt;/code&gt; as &lt;code&gt;handle-lid-switch&lt;/code&gt; or something similar to it.&lt;/li&gt;
+&lt;li&gt;In my case, it was GNOME tweaks. I had set a preference in earlier attempts to resolve this problem to not suspend when clamshelling the laptop, and it was taking priority over my settings for systemd-logind.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    </item>
+    
     <item>
       <title>How to install Graylog 5.0 on Debian 11 (single node)</title>
       <link>http://blog.bladewdr.xyz/posts/graylog-debian-install/</link>
