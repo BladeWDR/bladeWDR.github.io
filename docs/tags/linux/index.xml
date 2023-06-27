@@ -5,8 +5,137 @@
     <link>http://blog.bladewdr.xyz/tags/linux/</link>
     <description>Recent content in linux on Blade Server - A Homelabber&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 23 Jun 2023 21:11:41 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Jun 2023 14:39:45 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting up a Wireguard VPN server on Ubuntu 22.04</title>
+      <link>http://blog.bladewdr.xyz/posts/wireguard-server-setup/</link>
+      <pubDate>Tue, 27 Jun 2023 14:39:45 -0400</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/posts/wireguard-server-setup/</guid>
+      <description>I recently went through the process of setting up my own Wireguard VPN server up in a cloud server.
+You can do this on any Ubuntu server with internet access, as long as you have the ability to open ports on the firewall, but I do recommend setting this up at a cloud hosting provider such as Linode or Digital Ocean.
+The lowest tier of server will do - Wireguard is a pretty light VPN to run.</description>
+      <content>&lt;p&gt;I recently went through the process of setting up my own Wireguard VPN server up in a cloud server.&lt;/p&gt;
+&lt;p&gt;You can do this on any Ubuntu server with internet access, as long as you have the ability to open ports on the firewall, but I do recommend setting this up at a cloud hosting provider such as Linode or Digital Ocean.&lt;/p&gt;
+&lt;p&gt;The lowest tier of server will do - Wireguard is a pretty light VPN to run. I&amp;rsquo;m using a Linode &amp;ldquo;Nanode&amp;rdquo; plan, which is one shared CPU core and 2GB of RAM. Plenty enough for our purposes.&lt;/p&gt;
+&lt;p&gt;I won&amp;rsquo;t go over how to create the server and connect to it over SSH, as there are plenty of guides on that topic already. Come back when you&amp;rsquo;re logged into the server over SSH.&lt;/p&gt;
+&lt;h5 id=&#34;1-first-things-first---updates&#34;&gt;1. First things first - updates!&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt dist-upgrade&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can reboot at this step, or wait, since we&amp;rsquo;ll need to reboot in a minute anyway.&lt;/p&gt;
+&lt;h5 id=&#34;2-edit-etcsysctlconf-and-enable-ipv4-forwarding&#34;&gt;2. Edit &lt;code&gt;/etc/sysctl.conf&lt;/code&gt; and enable ipv4 forwarding&lt;/h5&gt;
+&lt;p&gt;This is needed for Wireguard to be able to pass the traffic on and act as an intermediary between you and the sites you&amp;rsquo;re trying to route to through the VPN.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sudo vim /etc/sysctl.conf&lt;/code&gt; or &lt;code&gt;sudo nano /etc/sysctl.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Uncomment the line that says &lt;em&gt;net.ipv4.ip_forward=1&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Reboot if you have pending kernel updates or run &lt;code&gt;sysctl -p&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;3-allow-port-for-the-wireguard-server-in-your-firewall-of-choice&#34;&gt;3. Allow port for the Wireguard server in your firewall of choice&lt;/h5&gt;
+&lt;p&gt;Once your server is up, log back in. Now we&amp;rsquo;ll need to open the port that Wireguard will be listening on.&lt;/p&gt;
+&lt;p&gt;I use port 444 but the default is 51820.&lt;/p&gt;
+&lt;p&gt;You can use either one - 444 is in the well-known ports range, but it&amp;rsquo;s for a pager service that I hadn&amp;rsquo;t heard of until I googled it. I think I&amp;rsquo;m safe.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s how to open the port with iptables:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo iptables -I INPUT 1 -p udp --dport 444 -j ACCEPT&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install the iptables-persistent package to make the rule survive reboots.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install iptables-persistent&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Save your rules. (You&amp;rsquo;ll need to redo this every time you make a change to your iptables rules.)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netfilter-persistent save&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s how to do the same thing with ufw:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo ufw allow 444&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Remember that if you have an upstream firewall (i.e. your router at home - you&amp;rsquo;ll need to forward the ports there too!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;4-generate-the-keys-for-the-wireguard-server&#34;&gt;4. Generate the keys for the Wireguard server.&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd /etc/wireguard
+sudo wg genkey | tee privatekey | wg pubkey &amp;gt; publickey
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This will generate 2 files in /etc/wireguard.&lt;/p&gt;
+&lt;p&gt;You can check their contents by running the &lt;code&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat /etc/wireguard/privatekey&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat /etc/wireguard/publickey&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Remember to keep your private key &lt;em&gt;private&lt;/em&gt;. It&amp;rsquo;s like a password.&lt;/p&gt;
+&lt;p&gt;Keep these handy, we&amp;rsquo;ll need them for the next part.&lt;/p&gt;
+&lt;h5 id=&#34;5-create-config-file-for-the-server&#34;&gt;5. Create config file for the server.&lt;/h5&gt;
+&lt;p&gt;Pick an address range for your wireguard tunnel. It should be a private IP address range, but it can be anything you want.&lt;/p&gt;
+&lt;p&gt;I chose 10.200.0.0/24.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve provided an example configuration below.&lt;/p&gt;
+&lt;p&gt;Open &lt;code&gt;/etc/wireguard/wg0.conf&lt;/code&gt; with your favorite editor and paste it in.&lt;/p&gt;
+&lt;p&gt;Remember to enter the private key you generated here earlier, and watch out for trailing whitespaces on the end of the key!&lt;/p&gt;
+&lt;p&gt;Example server config:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Interface]  
+Address = 10.200.0.1/24  
+SaveConfig = true  
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -o %i -j ACCEPT  
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -o %i -j ACCEPT  
+ListenPort = 444  
+PrivateKey = privatekeyhere
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;6-bring-up-the-wireguard-tunnel&#34;&gt;6. Bring up the Wireguard tunnel&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;wg-quick up wg0&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;7-create-client-config&#34;&gt;7. Create client config&lt;/h5&gt;
+&lt;p&gt;On mobile and windows generally the private and public keys will be created for you. On Linux, just re-run the same commands you used to generate your server keys.&lt;/p&gt;
+&lt;p&gt;For cleanliness you can create a &lt;code&gt;/etc/wireguard/clients&lt;/code&gt; subdirectory to hold all of your keys.&lt;/p&gt;
+&lt;p&gt;Example Client config:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Interface]
+PrivateKey = clientprivatekey
+Address = 10.200.0.2/24
+DNS = 9.9.9.9    
+
+[Peer]
+PublicKey = serverpublickey
+AllowedIPs = 0.0.0.0/0 #can change this depending on if you want full tunnel or split tunnel.
+Endpoint = public-ip-of-server:444
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For the &lt;code&gt;Endpoint&lt;/code&gt; field you can either use the public IP of the server, or a DNS name that you&amp;rsquo;ve created for it. Remember to specify the port.&lt;/p&gt;
+&lt;p&gt;For the &lt;code&gt;PublicKey&lt;/code&gt; field - this is the public key that you generated earlier on the &lt;em&gt;server&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;DNS&lt;/code&gt; it can be any DNS server you like. I usually set my Pi-Hole servers at home as my DNS on the tunnel to provide adblocking.
+For this example, I&amp;rsquo;ve just set it to use Quad9.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;AllowedIPs&lt;/code&gt; - set this to 0.0.0.0/0 only if you want to route &lt;em&gt;all&lt;/em&gt; traffic through the VPN tunnel. If you only want to use this as a remote access VPN, then leave it as only the Wireguard subnet.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AllowedIPs = 10.200.0.0/24&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;8-configure-the-server-to-bring-up-wireguards-interface-on-boot&#34;&gt;8. Configure the server to bring up wireguard&amp;rsquo;s interface on boot&lt;/h5&gt;
+&lt;p&gt;On the server, set the tunnel to come up automatically after a reboot.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;systemctl enable wg-quick@wg0&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;9-add-your-new-wireguard-peer&#34;&gt;9. Add your new wireguard peer&lt;/h5&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to add the client that you set up as a peer.&lt;/p&gt;
+&lt;p&gt;Wireguard uses public and private key pairs to authenticate peers, so you&amp;rsquo;ll need the public key of your chosen client to enter below.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wg set wg0 peer publickeyhere allowed-ips 10.200.0.2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Once you have this set, it&amp;rsquo;s a good idea to restart wireguard to make sure it knows about the new peer.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo wg-quick down wg0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo wg-quick up wg0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, you should be able to see it handshake.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo wg show&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t see a handshake happening - try sending some traffic across the tunnel.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ping 10.200.0.2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;That should be it! If you set this up as a full tunnel, try going to a site such as &lt;a href=&#34;https://dnsleaktest.com/&#34;&gt;dnsleaktest.com&lt;/a&gt; and make sure it shows the IP of the wireguard server rather than your actual public IP.&lt;/p&gt;
+&lt;p&gt;If you set it up as a split tunnel, see if you can access resources on the other side of the tunnel.&lt;/p&gt;
+&lt;h5 id=&#34;10-optional---set-up-your-router-as-a-wireguard-peer&#34;&gt;10. OPTIONAL - set up your router as a Wireguard peer!&lt;/h5&gt;
+&lt;p&gt;If you&amp;rsquo;d like to use your wireguard server to route traffic back to your local network, it&amp;rsquo;s pretty simple to do so with firewalls like PfSense and OpnSense, that have Wireguard support baked in.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m using OpnSense, so I&amp;rsquo;ll provide those steps here.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps for setting up opnsense as a client&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install the &lt;code&gt;os-wireguard-go&lt;/code&gt; plugin. You can find it under System &amp;gt; Firmware &amp;gt; Plugins.&lt;/li&gt;
+&lt;li&gt;Enable wireguard. VPN &amp;gt; Wireguard.&lt;/li&gt;
+&lt;li&gt;Configure the remote server as an Endpoint. The PSK field is optional for more security and can be left blank. Enter a name, the public key for your wireguard server, and the endpoint address and port.&lt;/li&gt;
+&lt;li&gt;Configure the &amp;ldquo;Local&amp;rdquo; server. Generate key pairs for it, pick an IP in your Wireguard subnet. Add the remote endpoint as a peer. &lt;code&gt;wg set wg0 peer publickeyhere allowed-ips 10.200.0.3&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Next we&amp;rsquo;ll need to add routes to tell Wireguard where to find your local subnets.&lt;/p&gt;
+&lt;h5 id=&#34;adding-routes&#34;&gt;Adding routes&lt;/h5&gt;
+&lt;p&gt;In the wireguard server config (/etc/wireguard/wg0.conf in this case):&lt;/p&gt;
+&lt;p&gt;Add each subnet you want to go through the VPN tunnel to the allowed IP list for that peer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Interface]
+Address = 10.200.0.1/24
+SaveConfig = true
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -o %i -j ACCEPT
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -o %i -j ACCEPT
+ListenPort = 444
+PrivateKey = privatekeyhere 
+
+#config for opnsense peer
+[Peer]
+PublicKey = publickeyhere 
+AllowedIPs = 10.200.0.3/32, 192.168.1.0/24 #192.168.1.0/24 being a subnet on the local network for this peer.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Test it out! If you&amp;rsquo;re not using the full tunnel option on your client (0.0.0.0/0 for AllowedIPs) you&amp;rsquo;ll need to add the local subnet to your allowed IPs list there, too.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Shut down your laptop automatically when clamshelled using systemd</title>
       <link>http://blog.bladewdr.xyz/posts/clamshell-shutdown/</link>

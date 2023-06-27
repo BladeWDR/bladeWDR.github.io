@@ -3,24 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://blog.bladewdr.xyz/</loc>
-    <lastmod>2023-06-23T21:11:41-04:00</lastmod>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/linux/</loc>
-    <lastmod>2023-06-23T21:11:41-04:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/tags/logind.conf/</loc>
-    <lastmod>2023-06-23T21:11:41-04:00</lastmod>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/posts/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/posts/wireguard-server-setup/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/ubuntu/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/vpn/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/wireguard/</loc>
+    <lastmod>2023-06-27T14:39:45-04:00</lastmod>
+  </url><url>
+    <loc>http://blog.bladewdr.xyz/tags/logind.conf/</loc>
     <lastmod>2023-06-23T21:11:41-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/posts/clamshell-shutdown/</loc>
     <lastmod>2023-06-23T21:11:41-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/systemd/</loc>
-    <lastmod>2023-06-23T21:11:41-04:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/tags/</loc>
     <lastmod>2023-06-23T21:11:41-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/tutorial/</loc>
@@ -36,9 +48,6 @@
     <lastmod>2023-04-10T20:55:05-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/tags/jammy/</loc>
-    <lastmod>2023-04-10T20:55:05-04:00</lastmod>
-  </url><url>
-    <loc>http://blog.bladewdr.xyz/tags/ubuntu/</loc>
     <lastmod>2023-04-10T20:55:05-04:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/categories/</loc>
@@ -69,6 +78,5 @@
     <lastmod>2023-01-17T23:00:46-05:00</lastmod>
   </url><url>
     <loc>http://blog.bladewdr.xyz/about/</loc>
-    <priority>0</priority>
   </url>
 </urlset>
