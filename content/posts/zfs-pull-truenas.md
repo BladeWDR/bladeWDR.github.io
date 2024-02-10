@@ -39,7 +39,7 @@ I recommend disabling password login entirely, and disabling samba authenticatio
 
 Create another user on the backup server. I recommend matching usernames, just for clarity, but it's not 100% necessary.
 
-![user creation panel](/truenasuser.png)
+![user creation panel](/static/images/truenasuser.png)
 
 #### Step 2: Assign privileges.
 
@@ -62,6 +62,8 @@ Choose manual as your setup method.
 
 Fill in as below.
 
+![backup credentials](/truenas_ssh.png)
+
 #### Step 4: Create your ZFS replication task.
 
 In the TrueNAS web UI, go to Data Protection and expand Replication Tasks.
@@ -76,9 +78,13 @@ If you want to copy child datasets, make sure you check off "Recursive". In my c
 
 If at any point you get the below prompt - make sure you click "Cancel". You'll need to hit Cancel twice. We don't need sudo, since we manually allowed our user account to run the needed zfs commands using `zfs allow`.
 
+![sudo prompt](/sudo_cancel.png)
+
 Click Next when you're ready. Choose a schedule. I chose "Daily", as it's not a big deal for this dataset if I lose a single day.
 
 And there you have it. You now have a much more secure method of replicating your data from one ZFS pool to another.
+
+![zfs replication wizard](/replication_wizard.png)
 
 #### Some additional notes.
 

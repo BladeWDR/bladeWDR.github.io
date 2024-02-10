@@ -197,7 +197,7 @@ I wanted to do my replications with an unprivileged user. I wanted the backups t
 <p>You need to create a user on each side. On the <em>sending</em> side, or in other words, your production server, you&rsquo;ll need to add an SSH authorized key, and enable a home directory.
 I recommend disabling password login entirely, and disabling samba authentication. You won&rsquo;t be using this user for anything but the backups.</p>
 <p>Create another user on the backup server. I recommend matching usernames, just for clarity, but it&rsquo;s not 100% necessary.</p>
-<p><img src="/truenasuser.png" alt="user creation panel"></p>
+<p><img src="/static/images/truenasuser.png" alt="user creation panel"></p>
 <h4 id="step-2-assign-privileges">Step 2: Assign privileges.<a href="#step-2-assign-privileges" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
 <p>In order to let this user account run zfs commands without root, you&rsquo;ll need to drop to the shell. There are options in the TrueNAS web UI for allowing certain sudo commands without a password, but it&rsquo;s better to do this on the command line, as it gives you more control over what specific rights your user has.</p>
 <p>On the receiving side, your user needs the receive, create, and mount privileges.</p>
@@ -208,6 +208,7 @@ I recommend disabling password login entirely, and disabling samba authenticatio
 <p>Head back to the TrueNAS web UI and click on Credentials &mdash;&gt; Backup Credentials. You want to add a new SSH connection.</p>
 <p>Choose manual as your setup method.</p>
 <p>Fill in as below.</p>
+<p><img src="/truenas_ssh.png" alt="backup credentials"></p>
 <h4 id="step-4-create-your-zfs-replication-task">Step 4: Create your ZFS replication task.<a href="#step-4-create-your-zfs-replication-task" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
 <p>In the TrueNAS web UI, go to Data Protection and expand Replication Tasks.</p>
 <p>You&rsquo;ll want to choose your &ldquo;SSH Connection&rdquo; first. Pick the one that you created in Step 3.</p>
@@ -215,8 +216,10 @@ I recommend disabling password login entirely, and disabling samba authenticatio
 <p>Do the same for your destination, which should be on a local ZFS pool.</p>
 <p>If you want to copy child datasets, make sure you check off &ldquo;Recursive&rdquo;. In my case, this dataset doesn&rsquo;t have any children, so I left it unchecked.</p>
 <p>If at any point you get the below prompt - make sure you click &ldquo;Cancel&rdquo;. You&rsquo;ll need to hit Cancel twice. We don&rsquo;t need sudo, since we manually allowed our user account to run the needed zfs commands using <code>zfs allow</code>.</p>
+<p><img src="/sudo_cancel.png" alt="sudo prompt"></p>
 <p>Click Next when you&rsquo;re ready. Choose a schedule. I chose &ldquo;Daily&rdquo;, as it&rsquo;s not a big deal for this dataset if I lose a single day.</p>
 <p>And there you have it. You now have a much more secure method of replicating your data from one ZFS pool to another.</p>
+<p><img src="/replication_wizard.png" alt="zfs replication wizard"></p>
 <h4 id="some-additional-notes">Some additional notes.<a href="#some-additional-notes" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
 <ul>
 <li>Remember that you&rsquo;ll need to have some snapshots on the source system for this to work. ZFS replication works based off of <em>snapshots</em>, because they are a consistent, immutable reference at a point in time. I recommend setting up automatic snapshot tasks for the datasets you want to back up.</li>
