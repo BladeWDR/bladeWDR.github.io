@@ -39,7 +39,7 @@ I recommend disabling password login entirely, and disabling samba authenticatio
 
 Create another user on the backup server. I recommend matching usernames, just for clarity, but it's not 100% necessary.
 
-![user creation panel](/static/images/truenasuser.png)
+![user creation panel](/truenasuser.png)
 
 #### Step 2: Assign privileges.
 
