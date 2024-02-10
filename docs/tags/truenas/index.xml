@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>truenas on Blade Server - A Homelabber&#39;s Blog</title>
+    <link>http://blog.bladewdr.xyz/tags/truenas/</link>
+    <description>Recent content in truenas on Blade Server - A Homelabber&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Feb 2024 14:58:56 -0500</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/truenas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How I set up ZFS replication backups in TrueNAS Scale</title>
+      <link>http://blog.bladewdr.xyz/posts/zfs-pull-truenas/</link>
+      <pubDate>Sat, 10 Feb 2024 14:58:56 -0500</pubDate>
+      
+      <guid>http://blog.bladewdr.xyz/posts/zfs-pull-truenas/</guid>
+      <description>How I set up ZFS replication backups in TrueNAS Scale When I set out to configure my ZFS replication backups, I knew that I wanted 2 things:
+I wanted to do my replications with an unprivileged user. I wanted the backups to be pulled from the backup server from the primary. The benefits of using a user without root privileges are obvious, but the benefits of a pull backup may be less so.</description>
+      <content>&lt;h2 id=&#34;how-i-set-up-zfs-replication-backups-in-truenas-scale&#34;&gt;How I set up ZFS replication backups in TrueNAS Scale&lt;/h2&gt;
+&lt;p&gt;When I set out to configure my ZFS replication backups, I knew that I wanted 2 things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I wanted to do my replications with an unprivileged user.&lt;/li&gt;
+&lt;li&gt;I wanted the backups to be &lt;em&gt;pulled&lt;/em&gt; from the backup server from the primary.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The benefits of using a user without root privileges are obvious, but the benefits of a pull backup may be less so.&lt;/p&gt;
+&lt;p&gt;Backing up with a pull instead of a push means that your production machine, which by definition has to be less secure than the backup, has no access to the backup server.&lt;/p&gt;
+&lt;p&gt;So, if somehow your production machine gets compromised - the attacker has no way of accessing the backup server, and possibly taking those hostage too!&lt;/p&gt;
+&lt;p&gt;Of course, you should make sure that you take steps to lock down your backup server.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure that SSH login only accepts public key authentication, instead of passwords.&lt;/li&gt;
+&lt;li&gt;Goes without saying that your production machine &lt;em&gt;should not have the the private key for this&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Set up firewall rules to prevent anything from connecting to the machine that isn&amp;rsquo;t supposed to. You probably want to poke holes for DNS resolution, and let the server get out to the internet for updates, but apart from that and a hole for your monitoring solution, the backup server should be totally isolated from everything else on your network!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;step-1-create-your-user-accounts&#34;&gt;Step 1: Create your user accounts.&lt;/h4&gt;
+&lt;p&gt;You need to create a user on each side. On the &lt;em&gt;sending&lt;/em&gt; side, or in other words, your production server, you&amp;rsquo;ll need to add an SSH authorized key, and enable a home directory.
+I recommend disabling password login entirely, and disabling samba authentication. You won&amp;rsquo;t be using this user for anything but the backups.&lt;/p&gt;
+&lt;p&gt;Create another user on the backup server. I recommend matching usernames, just for clarity, but it&amp;rsquo;s not 100% necessary.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://blog.bladewdr.xyz/truenasuser.png&#34; alt=&#34;user creation panel&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;step-2-assign-privileges&#34;&gt;Step 2: Assign privileges.&lt;/h4&gt;
+&lt;p&gt;In order to let this user account run zfs commands without root, you&amp;rsquo;ll need to drop to the shell. There are options in the TrueNAS web UI for allowing certain sudo commands without a password, but it&amp;rsquo;s better to do this on the command line, as it gives you more control over what specific rights your user has.&lt;/p&gt;
+&lt;p&gt;On the receiving side, your user needs the receive, create, and mount privileges.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;zfs allow pirate receive,create,mount pool&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;On the sending side, your user needs the send and hold privileges.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;zfs allow pirate send,hold pool&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;step-3-create-your-backup-credentials-in-truenas&#34;&gt;Step 3: Create your backup credentials in TrueNAS.&lt;/h4&gt;
+&lt;p&gt;Head back to the TrueNAS web UI and click on Credentials &amp;mdash;&amp;gt; Backup Credentials. You want to add a new SSH connection.&lt;/p&gt;
+&lt;p&gt;Choose manual as your setup method.&lt;/p&gt;
+&lt;p&gt;Fill in as below.&lt;/p&gt;
+&lt;h4 id=&#34;step-4-create-your-zfs-replication-task&#34;&gt;Step 4: Create your ZFS replication task.&lt;/h4&gt;
+&lt;p&gt;In the TrueNAS web UI, go to Data Protection and expand Replication Tasks.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll want to choose your &amp;ldquo;SSH Connection&amp;rdquo; first. Pick the one that you created in Step 3.&lt;/p&gt;
+&lt;p&gt;Next, choose your source location. You&amp;rsquo;ll want to pick &amp;ldquo;On a different system&amp;rdquo;, then choose the dataset or pool you want to replicate below.&lt;/p&gt;
+&lt;p&gt;Do the same for your destination, which should be on a local ZFS pool.&lt;/p&gt;
+&lt;p&gt;If you want to copy child datasets, make sure you check off &amp;ldquo;Recursive&amp;rdquo;. In my case, this dataset doesn&amp;rsquo;t have any children, so I left it unchecked.&lt;/p&gt;
+&lt;p&gt;If at any point you get the below prompt - make sure you click &amp;ldquo;Cancel&amp;rdquo;. You&amp;rsquo;ll need to hit Cancel twice. We don&amp;rsquo;t need sudo, since we manually allowed our user account to run the needed zfs commands using &lt;code&gt;zfs allow&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Click Next when you&amp;rsquo;re ready. Choose a schedule. I chose &amp;ldquo;Daily&amp;rdquo;, as it&amp;rsquo;s not a big deal for this dataset if I lose a single day.&lt;/p&gt;
+&lt;p&gt;And there you have it. You now have a much more secure method of replicating your data from one ZFS pool to another.&lt;/p&gt;
+&lt;h4 id=&#34;some-additional-notes&#34;&gt;Some additional notes.&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Remember that you&amp;rsquo;ll need to have some snapshots on the source system for this to work. ZFS replication works based off of &lt;em&gt;snapshots&lt;/em&gt;, because they are a consistent, immutable reference at a point in time. I recommend setting up automatic snapshot tasks for the datasets you want to back up.&lt;/li&gt;
+&lt;li&gt;Once you&amp;rsquo;ve completed the initial replication job, any subsequent jobs will be incrementals - as long as you have a common snapshot between the two hosts.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

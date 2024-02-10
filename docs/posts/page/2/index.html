@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Posts :: Blade Server - A Homelabber&#39;s Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://blog.bladewdr.xyz/posts/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="http://blog.bladewdr.xyz/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="http://blog.bladewdr.xyz/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/bladewdr/" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Posts">
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.bladewdr.xyz/posts/" />
+<meta property="og:site_name" content="Blade Server - A Homelabber&#39;s Blog" />
+
+  
+    <meta property="og:image" content="http://blog.bladewdr.xyz/img/favicon/red.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+  <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="Blade Server - A Homelabber&#39;s Blog" />
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Blade Server - A Homelabber&#39;s Blog
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+  
+  <div class="posts">
+    
+      <article class="post on-list">
+        <h1 class="post-title">
+          <a href="http://blog.bladewdr.xyz/posts/graylog-debian-install/">How to install Graylog 5.0 on Debian 11 (single node)</a>
+        </h1>
+        <div class="post-meta">
+          
+            <time class="post-date">
+              2023-01-17 ::
+            </time>
+          
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://blog.bladewdr.xyz/tags/debian/">debian</a>&nbsp;
+            
+            #<a href="http://blog.bladewdr.xyz/tags/ubuntu/">ubuntu</a>&nbsp;
+            
+            #<a href="http://blog.bladewdr.xyz/tags/graylog/">graylog</a>&nbsp;
+            
+            #<a href="http://blog.bladewdr.xyz/tags/logging/">logging</a>&nbsp;
+            
+            #<a href="http://blog.bladewdr.xyz/tags/linux/">linux</a>&nbsp;
+            
+            #<a href="http://blog.bladewdr.xyz/tags/tutorial/">tutorial</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            This was tested on 1/17/2023 on Debian 11 and Graylog 5.0 Using OpenSearch instead of ElasticSearch which is deprecated now. This is for a single node&hellip; multiple nodes is something that I have yet to look into.
+Install prerequisites MongoDB sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv f5679a222c647c87527c2f8cb00a0bd1e2c63c11echo &#34;deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse&#34; |sudo tee /etc/apt/sources.list.d/mongodb-org-5.x.listsudo apt-get updatesudo apt-get install -y mongodb-org Enable MongoDB on system startup sudo systemctl daemon-reloadsudo systemctl enable mongod.
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button" href="/posts/graylog-debian-install/">Read more →</a>
+          </div>
+        
+      </article>
+    
+
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+      <a href="/posts/" class="button previous">
+        <span class="button__icon">←</span>
+        <span class="button__text">Newer posts</span>
+      </a>
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

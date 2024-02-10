@@ -5,7 +5,7 @@
     <link>http://blog.bladewdr.xyz/tags/systemd/</link>
     <description>Recent content in systemd on Blade Server - A Homelabber&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Fri, 23 Jun 2023 21:11:41 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/systemd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shut down your laptop automatically when clamshelled using systemd</title>

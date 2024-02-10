@@ -5,7 +5,7 @@
     <link>http://blog.bladewdr.xyz/tags/jammy/</link>
     <description>Recent content in jammy on Blade Server - A Homelabber&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Mon, 10 Apr 2023 20:55:05 -0400</lastBuildDate><atom:link href="http://blog.bladewdr.xyz/tags/jammy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Geoip Blocking in Ubuntu 22.04 using iptables</title>

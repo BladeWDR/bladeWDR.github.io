@@ -39,6 +39,8 @@ I recommend disabling password login entirely, and disabling samba authenticatio
 
 Create another user on the backup server. I recommend matching usernames, just for clarity, but it's not 100% necessary.
 
+![user creation panel](/truenasuser.png)
+
 #### Step 2: Assign privileges.
 
 In order to let this user account run zfs commands without root, you'll need to drop to the shell. There are options in the TrueNAS web UI for allowing certain sudo commands without a password, but it's better to do this on the command line, as it gives you more control over what specific rights your user has.
