@@ -34,7 +34,7 @@ I wanted to do my replications with an unprivileged user. I wanted the backups t
 &lt;p&gt;You need to create a user on each side. On the &lt;em&gt;sending&lt;/em&gt; side, or in other words, your production server, you&amp;rsquo;ll need to add an SSH authorized key, and enable a home directory.
 I recommend disabling password login entirely, and disabling samba authentication. You won&amp;rsquo;t be using this user for anything but the backups.&lt;/p&gt;
 &lt;p&gt;Create another user on the backup server. I recommend matching usernames, just for clarity, but it&amp;rsquo;s not 100% necessary.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://blog.bladewdr.xyz/static/images/truenasuser.png&#34; alt=&#34;user creation panel&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://blog.bladewdr.xyz/truenasuser.png&#34; alt=&#34;user creation panel&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;step-2-assign-privileges&#34;&gt;Step 2: Assign privileges.&lt;/h4&gt;
 &lt;p&gt;In order to let this user account run zfs commands without root, you&amp;rsquo;ll need to drop to the shell. There are options in the TrueNAS web UI for allowing certain sudo commands without a password, but it&amp;rsquo;s better to do this on the command line, as it gives you more control over what specific rights your user has.&lt;/p&gt;
 &lt;p&gt;On the receiving side, your user needs the receive, create, and mount privileges.&lt;/p&gt;
